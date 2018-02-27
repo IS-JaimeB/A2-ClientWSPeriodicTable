@@ -14,35 +14,43 @@ public class ClientWSPeriodicTable {
         Scanner sc = new Scanner(System.in);
         System.out.println("Periodic table element: ");
         String element = sc.nextLine();
+        
         String aux = getAtomicNumber(element);
+        String aux2 = getAtoms();
         
         Serializer serializer = new Persister();
-        NewDataSet NewDataSet = new NewDataSet();
-        serializer.read(NewDataSet, aux);
-                
+        Serializer serializer2 = new Persister();
+        
+        NewDataSet1 NewDataSet = new NewDataSet1();
+        NewDataSet2 NewDataSet2 = new NewDataSet2();
+                       
         System.out.print("What would you like to know?\n1: Atomic Number\n"
                 + "2: Atomic Weight\n3: Element Symbol"
                 + "\n4: Get all atoms in the Periodic Table\nEnter a number: ");
             
         switch (new Scanner(System.in).nextInt()) {
             case 1: 
+                serializer.read(NewDataSet, aux);
                 System.out.println("Atomic Number = " + NewDataSet.getTable().getAtomicNumber());
                 break;
                     
             case 2:
+                serializer.read(NewDataSet, aux);
                 System.out.println("Atomic weight is " + NewDataSet.getTable().getAtomicWeight());
                 break;
 
             case 3: 
-                 System.out.println("Symbol is " + NewDataSet.getTable().getSymbol());
+                serializer.read(NewDataSet, aux);
+                System.out.println("Symbol is " + NewDataSet.getTable().getSymbol());
                 break;
                  
             case 4: 
-                    System.out.println("All atoms: \n" + getAtoms());
+                serializer2.read(NewDataSet2, aux2);
+                System.out.println("All atoms: \n" + NewDataSet2.getTable().getElementName());
                 break; 
 
             default:
-                 System.out.println("Number must be between 1 and 4.");
+                System.out.println("Number must be between 1 and 4.");
         }
     }
 
